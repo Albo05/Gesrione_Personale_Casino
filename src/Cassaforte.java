@@ -34,11 +34,6 @@ public class Cassaforte {
         System.out.println("Cassaforte chiusa.");
     }
 
-    public void cambiaCombinazione(String nuovaCombinazione) {
-        //combinazione = nuovaCombinazione;
-        System.out.println("Combinazione cambiata.");
-    }
-
     public void attivaAllarme() {
         allarme = true;
         System.out.println("Allarme attivato.");
