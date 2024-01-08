@@ -19,4 +19,9 @@ public class Croupier extends Impiegato {
         // Esempio di logica per l'assegnazione dei turni
         System.out.println("Turno assegnato per il tavolo: " + tavoloResponsabile);
     }
+
+    public void cambiaTavoloResponsabile(String nuovoTavolo) {
+    this.tavoloResponsabile = nuovoTavolo;
+    System.out.println("Il tavolo responsabile è stato cambiato a: " + nuovoTavolo);
+    }
 }
