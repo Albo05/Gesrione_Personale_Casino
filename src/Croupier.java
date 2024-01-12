@@ -1,14 +1,14 @@
 // Sottoclasse Croupier
 public class Croupier extends Impiegato {
-    private String tavoloResponsabile;
-    // tavolo di cui è responsabile il Croupier
-    // numero di giocatori presenti nel tavolo
-    // numero di giocatori in attesa di giocare al tavolo
+    private Tavolo tavolo;
     private int partiteGestite;
-
-    public Croupier(String nome, String cognome, int matricola, double stipendio, String tavoloResponsabile) {
+    private boolean inGioco;
+    private GestorePersonale gestorePersonale;
+    public Croupier(String nome, String cognome, int matricola, double stipendio, String ruolo, Tavolo tavolo, GestorePersonale gestorePersonale) {
         super(nome, cognome, matricola, stipendio, "Croupier");
-        this.tavoloResponsabile = tavoloResponsabile;
+        this.tavolo = tavolo;
+        this.inGioco = false;
+        this.gestorePersonale = gestorePersonale;
     }
 
     @Override
@@ -19,20 +19,20 @@ public class Croupier extends Impiegato {
 
     @Override
     public void assegnaTurno() {
-        // da fare: implementare 'assegnazione del turno per il Croupier
-        // Esempio di logica per l'assegnazione dei turni
-        System.out.println("Turno assegnato per il tavolo: " + tavoloResponsabile);
+
     }
 
-    public void cambiaTavoloResponsabile(String nuovoTavolo) {
-    this.tavoloResponsabile = nuovoTavolo;
-    System.out.println("Il tavolo responsabile è stato cambiato a: " + nuovoTavolo);
+    public void cambiaTavoloResponsabile(Tavolo nuovoTavolo) {
+        this.tavolo = nuovoTavolo;
+        System.out.println("Il tavolo responsabile è stato cambiato a: " + nuovoTavolo);
     }
-    public void iniziaPartita(/* tavolo dove avviene il gioco, i giocatori presenti */){
+    public void iniziaPartita(){
         // da fare: implementare 'inizio partita' per il Croupier
-        System.out.println("Partita iniziata per il tavolo: " + tavoloResponsabile);
+        for (Giocatore giocatore : tavolo.getGiocatori()) {
+            System.out.println("Il croupier ha distribuito le carte al giocatore: " + giocatore.getNome() + " " + giocatore.getCognome() + "(" + giocatore.getMatricola() + ").");
+        }
+        System.out.println("Partita iniziata per il tavolo: " + tavolo.getNumero());
         System.out.println("Gioco: descrizione del gioco");
-        // descrizione dei giocatori presenti al tavolo
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -40,21 +40,19 @@ public class Croupier extends Impiegato {
         }
         // logica del gioco
         System.out.println("Il vincitore è il giocatore ...");
-        System.out.println("Partita terminata per il tavolo: " + tavoloResponsabile);
-        // controllo tempo impiegato per la partita
-        if (true /* tempo impiegato per la partita è maggiore di tot tempo,
-        deve essere sostituito, sempre se è presente un croupier in grado di poter
-        gestire il tavolo*/) {
-            System.out.println("Il croupier " + nome + " " + cognome + " è stato sostituito");
-        }
-        // deposito soldi nella cassaforte
-        // richiama gli addetti al trasporto dei soldi
-        // rilascia i vari giocatori
+        System.out.println("Partita terminata per il tavolo: " + tavolo.getNumero());
+        int valoreVittoria = 100;
+        gestorePersonale.trasportoSoldi(tavolo, "Cassaforte", valoreVittoria);
+        tavolo.finepartita();
         partiteGestite++;
     }
-    public void richiamaTrasporto(/*num soldi da trasportare, eventualmente può
-    richiedere dei soldi per il tavolo*/) {
-        // da fare: implementare 'richiamo trasporto' per il Croupier
-        System.out.println("Richiamo trasporto per il tavolo: " + tavoloResponsabile);
+    public void assegnaTavolo(Tavolo tavolo){
+        this.tavolo = tavolo;
+    }
+    public boolean isInGioco() {
+        return inGioco;
+    }
+    public void setInGioco() {
+        this.inGioco = true;
     }
 }
