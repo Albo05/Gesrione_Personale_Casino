@@ -13,17 +13,31 @@ public class Caveau {
         this.operazioni = new ArrayList<>();
     }
 
-    public void deposita(double importo) {
-        saldo += importo;
-        registraOperazione("Deposito di " + importo);
-        System.out.println("Deposito effettuato.");
+    public void deposita(double importo, int numeroMatricola) {
+        if(cassaforte.apri(numeroMatricola)) {
+            cassaforte.deposita(importo);
+            saldo += importo;
+            registraOperazione("Deposito di " + importo);
+            System.out.println("Deposito effettuato.");
+            cassaforte.chiudi();
+        }
+        else {
+            System.out.println("Deposito non effettuato.");
+        }
     }
 
-    public void preleva(double importo) {
+    public void preleva(double importo, int numeroMatricola) {
         if (saldo >= importo) {
-            saldo -= importo;
-            registraOperazione("Prelievo di " + importo);
-            System.out.println("Prelievo effettuato.");
+            if(cassaforte.apri(numeroMatricola)) {
+                cassaforte.preleva(importo);
+                saldo -= importo;
+                registraOperazione("Prelievo di " + importo);
+                System.out.println("Prelievo effettuato.");
+                cassaforte.chiudi();
+            }
+            else {
+                System.out.println("Prelievo non effettuato.");
+            }
         } else {
             System.out.println("Saldo insufficiente per il prelievo.");
         }

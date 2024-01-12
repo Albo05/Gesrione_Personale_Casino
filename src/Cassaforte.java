@@ -15,16 +15,17 @@ public class Cassaforte {
         this.soldi = 1000000;
     }
 
-    public void apri(int numeroMatricola) {
+    public boolean apri(int numeroMatricola) {
         ultimoOperatore = numeroMatricola; // memorizzo l'ultimo operatore che ha avuto accesso alla cassaforte
         if (operatoriAbilitati.cercaImpiegato(numeroMatricola) != null) { //controllo se la combianzione inserita è corretta
             stato = true; // lo stato della cassaforte diventa aperto
             allarme = false; // viene disattivato l'allarme
-
             System.out.println("Cassaforte aperta correttamente.");
+            return true;
         } else {
             allarme = true;
             System.out.println("Combinazione errata. Cassaforte non aperta.");
+            return false;
         }
     }
 
@@ -43,7 +44,7 @@ public class Cassaforte {
         allarme = false;
         System.out.println("Allarme disattivato.");
     }
-    public void preleva(int soldiDaPrelevare) {
+    public void preleva(double soldiDaPrelevare) {
         if (stato) {
             if (allarme) {
                 System.out.println("Non è possibile prelevare soldi con l'allarme attivo.");
@@ -61,7 +62,7 @@ public class Cassaforte {
         }
     }
     // Metodo per depositare soldi nella cassaforte
-    public void deposita(int soldiDaDepositare) {
+    public void deposita(double soldiDaDepositare) {
         if (stato) {
             if (allarme) {
                 System.out.println("Non è possibile depositare soldi con l'allarme attivo.");
