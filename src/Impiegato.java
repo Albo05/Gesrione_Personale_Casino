@@ -25,6 +25,11 @@ public abstract class Impiegato {
         System.out.println("Stipendio: " + stipendio);
         System.out.println("Ruolo: " + ruolo);
     }
+
+    public static int generaCodiceMatricola() {
+        int codice = (int) (Math.random() * 1000000);
+        return codice;
+    }
 }
 
 

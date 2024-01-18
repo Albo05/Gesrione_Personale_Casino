@@ -7,12 +7,14 @@ public class Tavolo {
     private List<Giocatore> attesa;
     private boolean occupato;
     private boolean prontoInizio;
+    private int soldi;
 
     public Tavolo(int numero, int posti) {
         this.numero = numero;
         this.posti = posti;
         this.occupato = false;
         this.prontoInizio = false;
+        this.soldi = 0;
     }
 
     public int getNumero() {
@@ -39,6 +41,14 @@ public class Tavolo {
         }
     }
 
+    public void rimuoviSoldi(int importo) {
+        this.soldi -= importo;
+    }
+
+    public void aggiungiSoldi(int importo) {
+        this.soldi += importo;
+    }
+
     public void finepartita() {
         occupato = false;
         giocatori.clear();
@@ -51,4 +61,5 @@ public class Tavolo {
     public List<Giocatore> getGiocatori() {
         return giocatori;
     }
+    public int getValore() {return this.soldi;}
 }

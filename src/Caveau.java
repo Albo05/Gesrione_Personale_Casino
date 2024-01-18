@@ -44,7 +44,7 @@ public class Caveau {
     }
 
     private void registraOperazione(String operazione) {
-        operazioni.add(operazione); // Registra l'operazione nella lista
+        operazioni.add(operazione);
     }
 
     public void visualizzaSaldo() {

@@ -46,6 +46,15 @@ public class Croupier extends Impiegato {
         tavolo.finepartita();
         partiteGestite++;
     }
+
+    public void controllaTavolo() {
+        if (tavolo.getValore() > 100000) {
+            gestorePersonale.trasportoSoldi(tavolo, "Cassaforte", 50000);
+            tavolo.rimuoviSoldi(50000);
+            System.out.println("Il croupier ha chiamato un addetto al trasporto e gli ha consegnato 50000.");
+        }
+    }
+
     public void assegnaTavolo(Tavolo tavolo){
         this.tavolo = tavolo;
     }
