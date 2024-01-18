@@ -1,4 +1,4 @@
-public class AddettoTrasporto extends Impiegato{
+public class AddettoTrasporto extends Bodyguard{
     private double quantitaDenaro;
     private String destinazione;
     private Tavolo tavolo;
