@@ -1,15 +1,15 @@
 public class TrasportoDenaro {
-    private String nomeAddetto;
+    private AddettoTrasporto Addetto;
     private double quantitaDenaro;
 
-    public TrasportoDenaro(String nomeAddetto, double quantitaDenaro) {
-        this.nomeAddetto = nomeAddetto;
+    public TrasportoDenaro(AddettoTrasporto Addetto, double quantitaDenaro) {
+        this.Addetto = Addetto;
         this.quantitaDenaro = quantitaDenaro;
     }
 
-    public void assegnaNuovoAddetto(String nuovoAddetto) {
-        this.nomeAddetto = nuovoAddetto;
-        System.out.println("Il nuovo addetto è: " + nuovoAddetto);
+    public void assegnaNuovoAddetto(AddettoTrasporto Addetto) {
+        this.Addetto = Addetto;
+        System.out.println("Il nuovo addetto è: " + Addetto.nome);
     }
 
     public void cambiaQuantitaDenaro(double nuovaQuantita) {
