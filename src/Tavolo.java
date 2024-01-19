@@ -58,6 +58,10 @@ public class Tavolo {
         prontoInizio = true;
     }
 
+    public boolean isProntoInizio() {
+        return prontoInizio;
+    }
+
     public List<Giocatore> getGiocatori() {
         return giocatori;
     }

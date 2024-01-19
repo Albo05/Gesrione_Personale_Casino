@@ -34,7 +34,7 @@ public class GestorePersonale {
         boolean eseguito = false;
         while(!eseguito) {
             for(Tavolo tavolo : tavoli) {
-                if(!tavolo.isOccupato()) {
+                if(tavolo.isOccupato() && !tavolo.isProntoInizio()) {
                     for(Impiegato impiegato : listaImpiegati) {
                         if(impiegato instanceof Croupier) {
                             if(!((Croupier) impiegato).isInGioco()) {
