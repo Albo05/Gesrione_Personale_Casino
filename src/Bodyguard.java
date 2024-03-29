@@ -20,4 +20,7 @@ public class Bodyguard extends Impiegato {
         this.areaResponsabilita = nuovaArea;
         System.out.println("L'area di responsabilità è stata cambiata a: " + nuovaArea);
     }
+    public void run() {
+
+    }
 }

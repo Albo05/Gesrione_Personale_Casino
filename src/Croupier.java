@@ -1,3 +1,5 @@
+import java.util.Random;
+
 // Sottoclasse Croupier
 public class Croupier extends Impiegato {
     private Tavolo tavolo;
@@ -26,30 +28,60 @@ public class Croupier extends Impiegato {
         this.tavolo = nuovoTavolo;
         System.out.println("Il tavolo responsabile è stato cambiato a: " + nuovoTavolo);
     }
-    public void iniziaPartita(){
+    public void iniziaPartita() {
         // da fare: implementare 'inizio partita' per il Croupier
         for (Giocatore giocatore : tavolo.getGiocatori()) {
-            System.out.println("Il croupier ha distribuito le carte al giocatore: " + giocatore.getNome() + " " + giocatore.getCognome() + "(" + giocatore.getMatricola() + ").");
+            System.out.println("Croupier) Carte distribuite a: " + giocatore.getNome() + " " + giocatore.getCognome() + " (" + giocatore.getMatricola() + ")");
         }
-        System.out.println("Partita iniziata per il tavolo: " + tavolo.getNumero());
-        System.out.println("Gioco: descrizione del gioco");
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+        System.out.println("Croupier) Inizio gioco al tavolo: " + tavolo.getNumero());
+        System.out.println("Croupier) descrizione del gioco");
+        for (int i = 0; i < 3; i++) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.println("Croupier) Partita in corso");
+            try {
+                Thread.sleep(250);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.print(".");
+            try {
+                Thread.sleep(250);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.print(".");
+            try {
+                Thread.sleep(250);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.print(".");
+            System.out.println();
         }
-        // logica del gioco
-        System.out.println("Il vincitore è il giocatore ...");
-        System.out.println("Partita terminata per il tavolo: " + tavolo.getNumero());
-        int valoreVittoria = 100;
-        gestorePersonale.trasportoSoldi(tavolo, "Cassaforte", valoreVittoria);
+        System.out.println("Croupier) Il vincitore è il giocatore: " + tavolo.getGiocatori().get(0).getNome() + " " + tavolo.getGiocatori().get(0).getCognome());
+        System.out.println("Croupier) Partita terminata per il tavolo: " + tavolo.getNumero());
+        int valoreVittoria = (int)(Math.random()*2000)+15000;
+        boolean eseguito = false;
+        while (!eseguito) {
+            for(Impiegato impiegato : gestorePersonale.getListaImpiegati()) {
+                if(impiegato instanceof AddettoTrasporto && !((AddettoTrasporto) impiegato).isOccupato() && !eseguito) {
+                    ((AddettoTrasporto) impiegato).setInformazioni(tavolo, "Caveau", valoreVittoria);
+                    ((AddettoTrasporto) impiegato).setOccupato(true);
+                    eseguito = true;
+                }
+            }
+        }
         tavolo.finepartita();
         partiteGestite++;
     }
 
     public void controllaTavolo() {
         if (tavolo.getValore() > 100000) {
-            gestorePersonale.trasportoSoldi(tavolo, "Cassaforte", 50000);
+            //gestorePersonale.trasportoSoldi(tavolo, "Cassaforte", 50000);
             tavolo.rimuoviSoldi(50000);
             System.out.println("Il croupier ha chiamato un addetto al trasporto e gli ha consegnato 50000.");
         }
@@ -63,5 +95,25 @@ public class Croupier extends Impiegato {
     }
     public void setInGioco() {
         this.inGioco = true;
+    }
+
+    public void terminaLavoro(){
+        setContinua(false);
+    }
+    public void run() {
+        System.out.println("Croupier) Il Croupier " + nome + " " + cognome + " ha iniziato a lavorare");
+        while(continua) {
+            if(inGioco) {
+                System.out.println("Croupier) Il Croupier " + nome + " " + cognome + " ha iniziato la partita al tavolo: " + tavolo.getNumero());
+                iniziaPartita();
+                inGioco = false;
+            } else {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
     }
 }

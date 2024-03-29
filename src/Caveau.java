@@ -1,4 +1,3 @@
-// Classe Caveau
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,12 +16,12 @@ public class Caveau {
         if(cassaforte.apri(numeroMatricola)) {
             cassaforte.deposita(importo);
             saldo += importo;
-            registraOperazione("Deposito di " + importo);
-            System.out.println("Deposito effettuato.");
+            registraOperazione("Caveau) Deposito di " + importo);
+            System.out.println("Caveau) Deposito effettuato.");
             cassaforte.chiudi();
         }
         else {
-            System.out.println("Deposito non effettuato.");
+            System.out.println("Caveau) Deposito non effettuato.");
         }
     }
 

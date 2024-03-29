@@ -1,4 +1,4 @@
-public class Giocatore {
+public class Giocatore extends Thread{
     private String nome;
     private String cognome;
     private int matricola;

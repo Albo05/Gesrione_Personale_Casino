@@ -1,10 +1,11 @@
 // Classe astratta Impiegato
-public abstract class Impiegato {
+public abstract class Impiegato extends Thread{
     protected String nome;
     protected String cognome;
     protected int matricola;
     protected double stipendio;
     protected String ruolo;
+    protected boolean continua;
 
     public Impiegato(String nome, String cognome, int matricola, double stipendio, String ruolo) {
         this.nome = nome;
@@ -12,6 +13,7 @@ public abstract class Impiegato {
         this.matricola = matricola;
         this.stipendio = stipendio;
         this.ruolo = ruolo;
+        this.continua = true;
     }
 
     public abstract double calcolaStipendio();
@@ -29,6 +31,21 @@ public abstract class Impiegato {
     public static int generaCodiceMatricola() {
         int codice = (int) (Math.random() * 1000000);
         return codice;
+    }
+
+    public void setContinua(boolean valore) {
+        continua = valore;
+    }
+
+    public void run() {
+        while(continua) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.println("Impiegato) controllo");
+        }
     }
 }
 
